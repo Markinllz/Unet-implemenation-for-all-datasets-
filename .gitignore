@@ -1,0 +1,92 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.Python
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebook checkpoints
+*.ipynb_checkpoints
+
+# IDE settings
+.vscode/
+.idea/
+
+# Mac OS files
+.DS_Store
+
+# Test, coverage, and profiling
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Data, models, and outputs
+data/
+datasets/
+*.h5
+*.hdf5
+*.csv
+*.tsv
+*.npz
+*.npy
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.pb
+*.weights
+*.log
+*.zip
+*.tar
+*.tar.gz
+
+# Kaggle and Colab
+.kaggle/
+.kaggle.json
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Ignore secret files
+.env
+.env.*
+secrets.*
