@@ -72,4 +72,57 @@ class BasicDataset(Dataset):
         
 
 
+        @staticmethod
+        def preprocess(mask_values, pil_img, scale, is_mask):
+            w, h = pil_img.size()
+            new_w, new_h = int(w*scale), int(h*scale)
+            assert new_w > 0 and new_h > 0, 'scale is too small, resized images have zero dimensions of pixels'
+
+            pil_img = pil_img.resize((new_w, new_h), resample = Image.NEAREST if is_mask else Image.BICUBIC)
+            img = np.asarray(pil_img)
+
+
+
+            if is_mask:
+                mask = np.zeros((new_h, new_w))
+                for i, v in enumerate(mask_values):
+                    if (img.ndim == 2):
+                        mask[img == v] = i
+
+                    else:
+                        mask[(img == v).all(-1)] = i
+                return mask
         
+            else:
+                if (img.ndim == 2):
+                    img = img[np.newaxis, ...]
+                else:
+                    img = img.transpose((2, 0 , 1))
+
+                if (img > 1).any():
+                    img = img / 255
+
+
+                    return img
+                
+
+
+        def __getitem__ (self, idx):
+            name = self.ids[idx]
+
+            mask_file = list(self.mask_dir.glob(name + mask_suffix + '.*'))
+            img_file = list(self.images_dir.glob(name + '.*'))
+
+
+            assert len(img_file) == 1, f'Either no image or multiple images found for the ID {name}: {img_file}'
+            assert len(mask_file) == 1, f'Either no mask or multiple masks found for the ID {name}: {mask_file}'
+            mask = load_image(mask_file[0])
+            img = load_image(img_file[0])
+
+
+
+
+
+        
+
+
