@@ -114,11 +114,30 @@ class BasicDataset(Dataset):
             img_file = list(self.images_dir.glob(name + '.*'))
 
 
-            assert len(img_file) == 1, f'Either no image or multiple images found for the ID {name}: {img_file}'
-            assert len(mask_file) == 1, f'Either no mask or multiple masks found for the ID {name}: {mask_file}'
+            assert len(img_file) == 1, f'Double ID or not Image {name}: {img_file}'
+            assert len(mask_file) == 1, f'Double mask id or not mask {name}: {mask_file}'
             mask = load_image(mask_file[0])
             img = load_image(img_file[0])
 
+
+
+            assert img.size == mask.size, f'Image and mask {name} should be the same size, but are {img.size} and {mask.size}'
+
+            img = self.preprocess(self.mask_values, img, self.scale, is_mask=False)
+            mask = self.preprocess(self.mask_values, mask, self.scale, is_mask=True)
+
+
+
+            return {
+                'image': torch.as_tensor(img.copy()).float().contiguous(),
+                'mask': torch.as_tensor(mask.copy()).long().contiguous()
+            }
+        
+
+
+        class RetineDataSet(BasicDataset):
+            def __init__(self, images_dir, mask_dir, scale = 1):
+                super.__init__(images_dir, mask_dir, scale, mask_suffix = '')
 
 
 
