@@ -54,7 +54,6 @@ datasets/
 *.npy
 *.pt
 *.ckpt
-*.pth
 *.onnx
 *.pb
 *.weights
