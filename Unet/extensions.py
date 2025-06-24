@@ -14,7 +14,7 @@ class DConv2d(nn.Module):
             nn.Conv2d(in_channels, mid_channels, kernel_size = 3, padding = 1),
             nn.BatchNorm2d(mid_channels),
             nn.ReLU(inplace=True),
-            nn.Conv2d(in_channels, mid_channels, kernel_size = 3, padding = 1),
+            nn.Conv2d(mid_channels, out_channels , kernel_size = 3, padding = 1),
             nn.BatchNorm2d(out_channels),
             nn.ReLU(inplace=True)
         )
@@ -46,10 +46,10 @@ class Up(nn.Module):
 
         if bilinear:
             self.up = nn.Upsample(scale_factor = 2, mode = 'bilinear', align_corners = True)
-            self.conv = DConv2d(in_channels, out_channels, in_channels / 2)
+            self.conv = DConv2d(in_channels, out_channels, in_channels // 2)
 
         else:
-            self.up = nn.ConvTranspose2d(in_channels, in_channels / 2, kernel_size = 2, stride = 2)
+            self.up = nn.ConvTranspose2d(in_channels, in_channels // 2, kernel_size = 2, stride = 2)
             self.conv = DConv2d(in_channels, out_channels)
 
 
@@ -63,7 +63,7 @@ class Up(nn.Module):
         diffX = x2.size()[3] - x1.size()[3]
 
 
-        x1 = F.pad(x1, [diffX / 2, diffX - diffX / 2, diffY / 2, diffY - diffY / 2])
+        x1 = F.pad(x1, [diffX // 2, diffX - diffX // 2, diffY // 2, diffY - diffY // 2])
 
         x1 = torch.cat([x2,x1], dim = 1)
 

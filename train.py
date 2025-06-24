@@ -4,6 +4,7 @@ import os
 import random
 import sys
 import torch
+from torch.cuda.amp import GradScaler
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
@@ -12,16 +13,17 @@ from pathlib import Path
 from torch import optim
 from torch.utils.data import DataLoader, random_split
 from tqdm import tqdm
+import numpy as np
 
 import wandb
 from eval import evaluate
-from Unet import UNet
-from utils.data_loader import BasicDataset, CarvanaDataset
+from Unet.model import Unet
+from utils.data_loader import BasicDataset, RetineDataSet
 from utils.dice_score import dice_loss
 
-dir_img = Path('./data/train/image')
-dir_mask = Path('./data/train/mask')
-dir_checkpoint = Path('./data/checkpoints/')
+dir_img = Path('./data/Data/train/image')
+dir_mask = Path('./data/Data/train/mask')
+dir_checkpoint = Path('./data/Data/checkpoints/')
 
 
 def train_model(
@@ -40,9 +42,17 @@ def train_model(
 ):
     
     try:
-        dataset = CarvanaDataset(dir_img, dir_mask, img_scale)
+        dataset = RetineDataSet(dir_img, dir_mask, img_scale)
     except (AssertionError, RuntimeError, IndexError):
         dataset = BasicDataset(dir_img, dir_mask, img_scale)
+
+    logging.info(dataset.__len__())
+    logging.info(dataset.images_dir)
+    logging.info(dataset.mask_dir)
+    sample = dataset[0]
+    logging.info(f"Sample image shape: {sample['image'].shape}, dtype: {sample['image'].dtype}")
+    logging.info(f"Sample mask shape: {sample['mask'].shape}, dtype: {sample['mask'].dtype}")
+    logging.info(f"Sample mask unique values: {np.unique(sample['mask'].numpy())}")
 
     n_val = int(len(dataset) * val_percent)
     n_train = len(dataset) - n_val
@@ -75,7 +85,7 @@ def train_model(
     optimizer = optim.RMSprop(model.parameters(),
                               lr=learning_rate, weight_decay=weight_decay, momentum=momentum, foreach=True)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=5)
-    grad_scaler = torch.cuda.amp.GradScaler(enabled=amp)
+    grad_scaler = GradScaler(enabled=amp)
     criterion = nn.CrossEntropyLoss() if model.n_classes > 1 else nn.BCEWithLogitsLoss()
     global_step = 0
 
@@ -86,7 +96,7 @@ def train_model(
         with tqdm(total=n_train, desc=f'Epoch {epoch}/{epochs}', unit='img') as pbar:
             for batch in train_loader:
                 images, true_masks = batch['image'], batch['mask']
-
+                print('BATCH image shape:', images.shape)
                 assert images.shape[1] == model.n_channels, \
                     f'Network has been defined with {model.n_channels} input channels, ' \
                     f'but loaded images have {images.shape[1]} channels. Please check that ' \
@@ -165,7 +175,7 @@ def train_model(
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Train the UNet on images and target masks')
+    parser = argparse.ArgumentParser(description='Train the Unet on images and target masks')
     parser.add_argument('--epochs', '-e', metavar='E', type=int, default=5, help='Number of epochs')
     parser.add_argument('--batch-size', '-b', dest='batch_size', metavar='B', type=int, default=1, help='Batch size')
     parser.add_argument('--learning-rate', '-l', metavar='LR', type=float, default=1e-5,
@@ -189,7 +199,7 @@ if __name__ == '__main__':
     logging.info(f'Using device {device}')
 
 
-    model = UNet(n_channels=3, n_classes=args.classes, bilinear=args.bilinear)
+    model = Unet(n_channels=3, n_classes=args.classes, bilinear=args.bilinear)
     model = model.to(memory_format=torch.channels_last)
 
     logging.info(f'Network:\n'
