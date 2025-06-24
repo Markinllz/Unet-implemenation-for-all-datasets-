@@ -43,7 +43,8 @@ coverage.xml
 *.log
 wandb/
 # Data, models, and outputs
-data/
+data/Data/test
+data/Data/train
 datasets/
 *.h5
 *.hdf5
@@ -51,9 +52,9 @@ datasets/
 *.tsv
 *.npz
 *.npy
-*.pth
 *.pt
 *.ckpt
+*.pth
 *.onnx
 *.pb
 *.weights
