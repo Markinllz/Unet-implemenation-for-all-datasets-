@@ -1,7 +1,7 @@
 import torch
 from Unet.model import Unet as _UNet
 
-def unet_carvana(pretrained=False, scale=0.5):
+def unet_f(pretrained=False, scale=0.5):
  
     net = _UNet(n_channels=3, n_classes=2, bilinear=False)
     if pretrained:
