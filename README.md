@@ -1,7 +1,7 @@
-https://storage.googleapis.com/kaggle-datasets-images/3636171/6318833/23e8ee1961bc1e6cf5b20156a30e03dd/dataset-cover.jpg?t=2023-08-17-13-37-07![image](https://github.com/user-attachments/assets/48e73531-2033-41c9-8550-de395f39a3ed)
+!https://storage.googleapis.com/kaggle-datasets-images/3636171/6318833/23e8ee1961bc1e6cf5b20156a30e03dd/dataset-cover.jpg?t=2023-08-17-13-37-07![image](https://github.com/user-attachments/assets/48e73531-2033-41c9-8550-de395f39a3ed)
 
 
-https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.geeksforgeeks.org%2Fmachine-learning%2Fu-net-architecture-explained%2F&psig=AOvVaw3jyV2XHDgkvBhAQqqOwZ2S&ust=1750897206127000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCODZ4MGmi44DFQAAAAAdAAAAABAE![image](https://github.com/user-attachments/assets/58018802-5031-4ac8-807d-769641edfd50)
+!https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.geeksforgeeks.org%2Fmachine-learning%2Fu-net-architecture-explained%2F&psig=AOvVaw3jyV2XHDgkvBhAQqqOwZ2S&ust=1750897206127000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCODZ4MGmi44DFQAAAAAdAAAAABAE![image](https://github.com/user-attachments/assets/58018802-5031-4ac8-807d-769641edfd50)
 
 # U-Net: Retina Blood Vessel Segmentation with PyTorch
 
