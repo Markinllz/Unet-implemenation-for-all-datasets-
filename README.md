@@ -1,5 +1,4 @@
-https://media.geeksforgeeks.org/wp-content/uploads/20220614121231/Group14.jpg![image](https://github.com/user-attachments/assets/f4daafc4-8ed0-42c7-8b7e-62463e13ff57)
-
+![UNet architecture](https://media.geeksforgeeks.org/wp-content/uploads/20220614121231/Group14.jpg)
 
 
 
