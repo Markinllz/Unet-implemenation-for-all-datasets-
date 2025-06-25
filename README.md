@@ -1,4 +1,6 @@
-https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.geeksforgeeks.org%2Fmachine-learning%2Fu-net-architecture-explained%2F&psig=AOvVaw3jyV2XHDgkvBhAQqqOwZ2S&ust=1750897206127000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCODZ4MGmi44DFQAAAAAdAAAAABAE![image](https://github.com/user-attachments/assets/efdef042-5527-44b3-901e-a0dab9ec74ee)
+https://media.geeksforgeeks.org/wp-content/uploads/20220614121231/Group14.jpg![image](https://github.com/user-attachments/assets/f4daafc4-8ed0-42c7-8b7e-62463e13ff57)
+
+
 
 
 # U-Net: Retina Blood Vessel Segmentation with PyTorch
