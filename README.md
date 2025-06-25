@@ -92,6 +92,7 @@ Simply run your training script and follow the link printed in the console.
 
 The Retina Blood Vessel Segmentation dataset contains high-resolution retinal fundus images with pixel-level vessel annotations.  
 Masks are binary: vessel pixels are labeled as 1, background as 0.
+https://storage.googleapis.com/kaggle-datasets-images/3636171/6318833/23e8ee1961bc1e6cf5b20156a30e03dd/dataset-cover.jpg?t=2023-08-17-13-37-07![Retina Blood Vessel](https://github.com/user-attachments/assets/bb8e4385-f341-4258-b6f9-1558ecf57911)
 
 ---
 
